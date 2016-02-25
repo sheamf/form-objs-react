@@ -35,4 +35,6 @@ FormObjsEdit::Application.configure do
   config.active_support.deprecation = :stderr
 
   config.active_support.test_order = :random
+
+  config.react.variant = :development
 end
