@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-FormObjsEdit::Application.load_tasks
+FormObjsReact::Application.load_tasks

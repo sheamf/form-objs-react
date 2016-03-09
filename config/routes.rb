@@ -1,4 +1,4 @@
-FormObjsEdit::Application.routes.draw do
+FormObjsReact::Application.routes.draw do
 
   root 'companies#index'
 
