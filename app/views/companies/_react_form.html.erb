@@ -4,11 +4,9 @@
 
   $(function() {
     var companyForm = React.createElement(CompanyForm, { id: 'company-form', 
-                                                         title: 'Edit <%= @form.company.name %> + offices', 
-                                                         companyPathPrefix: '<%= company_path(@form.company) %>', 
-                                                         companyName: '<%= @form.company.name %>',
-                                                         companyEmployeeCount: '<%= @form.company.employee_count %>' } );
-    
+                                                         title: 'Edit <%= @company.name %> + offices', 
+                                                         companyFormPath: '<%= company_form_path(@company) %>'//,
+                                                       } );
     React.render(companyForm, document.getElementById('company-form'));
   });
 

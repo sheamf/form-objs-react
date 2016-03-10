@@ -4,6 +4,8 @@ FormObjsReact::Application.routes.draw do
 
   resources :companies
 
+  get 'company_form/:id', to: 'companies#company_form', as: 'company_form'
+
 end
 
 

@@ -1,14 +1,28 @@
 var CompanyForm = React.createClass({
 
+  getInitialState: function() {
+    return { company: '', offices: '' }
+  },
+
+  componentDidMount: function() {
+    $.get(this.props.companyFormPath, function(response) {
+      console.log("response:", response);
+      var company = response.company
+      this.setState({
+        company: response.company, offices: response.office_rows
+      })
+    }.bind(this));
+  },
+
   render: function() {
+    console.log("in render fn");
     return  (
       <div>
         <h3>{this.props.title}</h3>
         <div id='company-form'>
           <div className="row">
-            {/* use props directly in render rather in getInitialState and then doing this.state.companyName 
-                in render: https://facebook.github.io/react/tips/props-in-getInitialState-as-anti-pattern.html */}
-            <CompanyFields companyName={this.props.companyName} companyEmployeeCount={this.props.companyEmployeeCount} />
+
+            <CompanyFields company={this.state.company} />
 
           </div>
         </div>

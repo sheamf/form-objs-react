@@ -6,6 +6,11 @@ class EditCompanyForm < CompanyForm
     @company = company
     @name = company.name
     @employee_count = company.employee_count
+    set_office_rows # kinda hack-y way to include office_rows in json rendered by CompaniesController#company_form
+  end
+
+  def set_office_rows
+    office_rows
   end
 
   def office_rows

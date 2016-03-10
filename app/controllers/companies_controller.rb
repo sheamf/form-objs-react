@@ -24,8 +24,14 @@ class CompaniesController < ApplicationController
   end
 
   def edit
+    @company = Company.find(params[:id])
+  end
+
+  def company_form
     company = Company.find(params[:id])
-    @form = EditCompanyForm.new(company)
+    form = EditCompanyForm.new(company)
+
+    render json: form
   end
 
   def update

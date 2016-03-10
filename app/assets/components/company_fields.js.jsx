@@ -1,5 +1,9 @@
 var CompanyFields = React.createClass({
 
+  getDefaultProps: function() {
+    return { company: { name: '', employee_count: '' } }
+  },
+
   render: function() {
     return (
 
@@ -14,7 +18,7 @@ var CompanyFields = React.createClass({
                  id="company_name" 
                  name="company_name" 
                  type="text" 
-                 value={this.props.companyName} />
+                 value={this.props.company.name} />
         </div>
 
         <div className="form-group">
@@ -23,7 +27,7 @@ var CompanyFields = React.createClass({
                  id="company_employee_count" 
                  name="company_employee_count" 
                  type="text" 
-                 value={this.props.companyEmployeeCount} />                
+                 value={this.props.company.employee_count} />                
         </div>
       </div>
   
