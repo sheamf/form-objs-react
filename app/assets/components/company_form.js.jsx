@@ -1,7 +1,7 @@
 var CompanyForm = React.createClass({
 
   getInitialState: function() {
-    return { company: '', offices: '' }
+    return { company: '', offices: [] }
   },
 
   componentDidMount: function() {
@@ -23,6 +23,7 @@ var CompanyForm = React.createClass({
           <div className="row">
 
             <CompanyFields company={this.state.company} />
+            <OfficeRows offices={this.state.offices} />
 
           </div>
         </div>

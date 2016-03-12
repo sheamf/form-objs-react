@@ -1,5 +1,24 @@
 <div class="col-md-4">
-  <h3>Companies</h3>
+  <h3>Companies</h3><br><br>
+
+  <div id="test-component"></div><br><br>
+  <div id="hello-user"></div><br><br>
+  <div id="friends-container"></div><br><br>
+  <div id="products-container"></div><br><br>
+  <script>
+    $(function() {
+      var testComponent = React.createElement(TestComponent);
+      React.render(testComponent, document.getElementById('test-component'));
+      var helloUser = React.createElement(HelloUser);
+      React.render(helloUser, document.getElementById('hello-user'));
+      var friendsContainer = React.createElement(FriendsContainer);
+      React.render(friendsContainer, document.getElementById('friends-container'));
+
+      var filterableProductTable = React.createElement(FilterableProductTable);
+      React.render(filterableProductTable, document.getElementById('products-container'));
+
+    });
+  </script>
 
   <table class="table">
     <tbody>
