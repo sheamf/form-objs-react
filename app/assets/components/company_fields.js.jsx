@@ -4,10 +4,18 @@ var CompanyFields = React.createClass({
     return { company: { name: '', employee_count: '' } }
   },
 
+  getInitialState: function() {
+    return { updateDisabled: true }
+  },
+
+  enableSubmit: function() {
+    this.setState({ updateDisabled: false })
+  },
+
   render: function() {
     return (
 
-      <div className="col-md-4 company-details">
+      <form className="col-md-4 company-details" onChange={this.enableSubmit}>
         <h3>Company Details</h3>
 
         {/* TODO consider breaking up these input fields into their own components for reusability */}
@@ -18,7 +26,7 @@ var CompanyFields = React.createClass({
                  id="company_name" 
                  name="company_name" 
                  type="text" 
-                 value={this.props.company.name} />
+                 defaultValue={this.props.company.name} />
         </div>
 
         <div className="form-group">
@@ -27,9 +35,25 @@ var CompanyFields = React.createClass({
                  id="company_employee_count" 
                  name="company_employee_count" 
                  type="text" 
-                 value={this.props.company.employee_count} />                
+                 defaultValue={this.props.company.employee_count} />                
         </div>
-      </div>
+
+        <div>
+          <input className="btn btn-primary"
+                 name="commit"
+                 type="submit"
+                 value="Update" 
+                 disabled={this.state.updateDisabled} />
+        </div>
+
+        <div>
+          <button className="btn"
+                  id="add-office-row" 
+                  name="button"
+                  type="button">Add Another Office</button>
+        </div>
+
+      </form>
   
     )
   }
