@@ -46,13 +46,6 @@ var CompanyFields = React.createClass({
                  disabled={this.state.updateDisabled} />
         </div>
 
-        <div>
-          <button className="btn"
-                  id="add-office-row" 
-                  name="button"
-                  type="button">Add Another Office</button>
-        </div>
-
       </form>
   
     )

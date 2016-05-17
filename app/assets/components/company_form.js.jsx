@@ -30,6 +30,7 @@ var CompanyForm = React.createClass({
           <div className="row">
 
             <CompanyFields company={this.state.company} />
+            <NewOffice />
             <OfficeRows offices={this.state.offices} />
 
           </div>
