@@ -14,6 +14,11 @@ var CompanyForm = React.createClass({
     }.bind(this));
   },
 
+  addOffice: function(office) {
+    this.state.offices.push(office)
+    this.setState({ offices: this.state.offices })
+  },
+
   render: function() {
     console.log("in render fn");
     console.log("this.state", this.state);
@@ -30,7 +35,7 @@ var CompanyForm = React.createClass({
           <div className="row">
 
             <CompanyFields company={this.state.company} />
-            <NewOffice />
+            <NewOffice company={this.state.company} addOffice={this.addOffice}/>
             <OfficeRows offices={this.state.offices} />
 
           </div>

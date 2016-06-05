@@ -60,11 +60,15 @@ class CompanyForm
     def persisted?
       false
     end
+
+    def valid? # added for ajax creation of individual office
+      super
+    end
   end
 
   class NewOfficeRow < OfficeRow
 
-    attr_accessor :company
+    attr_accessor :company, :new_office
 
     def initialize(params = {})
       @company = params[:company]
@@ -75,8 +79,22 @@ class CompanyForm
       false
     end
 
+    def submit # added for ajax creation of individual office
+      if valid?
+        persist!
+        true
+      else
+        false
+      end
+    end
+
+    def valid? # added for ajax creation of individual office
+      super
+    end
+
     def persist! # find a better way to create the association
-      Office.create!(name: name, city: city, state: state, employee_count: employee_count, company_id: @company.try(:id))
+       # @new_office added for ajax creation of individual office
+      @new_office = Office.create!(name: name, city: city, state: state, employee_count: employee_count, company_id: @company.try(:id))
     end
   end
 end

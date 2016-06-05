@@ -6,6 +6,8 @@ FormObjsReact::Application.routes.draw do
 
   get 'company_form/:id', to: 'companies#company_form', as: 'company_form'
 
+  resources :offices, only: [:create, :update]
+
 end
 
 

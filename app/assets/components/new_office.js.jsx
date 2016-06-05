@@ -5,21 +5,17 @@ var NewOffice = React.createClass({
   },
 
   addOfficeRow: function() {
-    console.log("add button clicked!");
     this.setState({ showOfficeForm: true })
   },
 
   render: function() {
-
-    office = { id: 0, name: '', city: '', state: '', employee_count: null }
+    var company = this.props.company
+    var office = { id: 0, name: '', city: '', state: '', employee_count: null }
 
     if (this.state.showOfficeForm == true) {
       return (
-
-        <OfficeFields key={office.id} office={office} />
-
+        <OfficeFields key={office.id} company={company} office={office} addOffice={this.props.addOffice}/>
       )
-
 
     } else {
 
