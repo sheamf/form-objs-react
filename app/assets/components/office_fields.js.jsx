@@ -4,7 +4,6 @@ var OfficeFields = React.createClass({
   // clean up all this repetitive html attribute nonsense
 
   getInitialState: function() {
-    console.log("in getInitialState, this.props.office:", this.props.office);
     return { updateDisabled: true, office: this.props.office }
   },
 
@@ -16,6 +15,7 @@ var OfficeFields = React.createClass({
     console.log("in postSave");
     this.props.addOffice(newOffice);
     this.setState({ updateDisabled: true, office: this.props.office })
+    this.props.hideForm();
   },
 
   postUpdate: function(updatedOffice) {

@@ -8,13 +8,21 @@ var NewOffice = React.createClass({
     this.setState({ showOfficeForm: true })
   },
 
+  hideForm: function() {
+    this.setState({ showOfficeForm: false })
+  },
+
   render: function() {
     var company = this.props.company
     var office = { id: 0, name: '', city: '', state: '', employee_count: null }
 
     if (this.state.showOfficeForm == true) {
       return (
-        <OfficeFields key={office.id} company={company} office={office} addOffice={this.props.addOffice}/>
+        <OfficeFields key={office.id} 
+                      company={company} 
+                      office={office} 
+                      addOffice={this.props.addOffice} 
+                      hideForm={this.hideForm} />
       )
 
     } else {
