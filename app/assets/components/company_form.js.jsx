@@ -1,7 +1,7 @@
 var CompanyForm = React.createClass({
 
   getInitialState: function() {
-    return { company: null, offices: null } // this seems bad
+    return { company: null, offices: null }
   },
 
   componentDidMount: function() {
@@ -19,10 +19,17 @@ var CompanyForm = React.createClass({
     this.setState({ offices: this.state.offices })
   },
 
+  updateOffice: function(office) {
+    var officeIdx = this.state.offices.findIndex(o => o.id == office.id);
+
+    if (officeIdx !== -1) {
+      this.state.offices[officeIdx] = office
+    }
+    this.setState({ offices: this.state.offices })
+  },
+
   render: function() {
     console.log("in render fn");
-    console.log("this.state", this.state);
-
     if (this.state.company == null) {
       // this.state itself is also null the first time through, but don't want to use that as a check b/c if
       // I later end up setting some other state it will pass before the ajax response and break everything
@@ -36,7 +43,7 @@ var CompanyForm = React.createClass({
 
             <CompanyFields company={this.state.company} />
             <NewOffice company={this.state.company} addOffice={this.addOffice}/>
-            <OfficeRows offices={this.state.offices} />
+            <OfficeRows company={this.state.company} offices={this.state.offices} updateOffice={this.updateOffice}/>
 
           </div>
 

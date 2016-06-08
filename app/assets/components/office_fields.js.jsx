@@ -4,7 +4,8 @@ var OfficeFields = React.createClass({
   // clean up all this repetitive html attribute nonsense
 
   getInitialState: function() {
-    return { updateDisabled: true }
+    console.log("in getInitialState, this.props.office:", this.props.office);
+    return { updateDisabled: true, office: this.props.office }
   },
 
   enableSubmit: function(e) {
@@ -12,29 +13,42 @@ var OfficeFields = React.createClass({
   },
 
   postSave: function(newOffice) {
+    console.log("in postSave");
     this.props.addOffice(newOffice);
+    this.setState({ updateDisabled: true, office: this.props.office })
+  },
+
+  postUpdate: function(updatedOffice) {
+    console.log("in postUpdate");
+    this.props.updateOffice(updatedOffice);
+    this.setState({ updateDisabled: true, office: this.props.office })
+  },
+
+  handleChange: function(name, e) {
+    var office = this.state.office;
+    office[name] = e.target.value;
+    this.setState({ office: office });
   },
 
   saveOffice: function(e) {
     e.preventDefault();
 
-    var company = this.props.company
-    var office = {
-      id: this.refs.id.value,
-      name: this.refs.name.value,
-      city: this.refs.city.value,
-      state: this.refs.state.value,
-      employee_count: this.refs.employee_count.value
-    }
-    var params = { company_id: company.id, office: office }
+    var company = this.props.company;
+    var office = this.state.office;
+    var params = { office, company_id: company.id }
     var _this = this;
 
     if (office.id == "0") {
-      console.log("at least office.id == '0'...");
+      var reqType = 'POST'
+      var url = '/offices';
+    } else {
+      var reqType = 'PUT'
+      var url = '/offices/' + office.id;
+    }
       $.ajax({
-        type: 'POST',
+        type: reqType,
         dataType: 'json',
-        url: '/offices',
+        url: url,
         data: params,
         success: function(response) {
           if (response.errors) {
@@ -43,8 +57,15 @@ var OfficeFields = React.createClass({
           } else {
             // view.updateShift(shift);
             // SEARCH DASHBOARD FOR 'module.updateShift' for a probs good way of updating react views
-            var newOffice = response.new_office
-            _this.postSave(newOffice);
+            if ('new_office' in response) {
+              var newOffice = response.new_office // condense into 1 line
+              _this.postSave(newOffice);
+            } else {
+              var updatedOffice = response.updated_office
+              console.log("updatedOffice", updatedOffice);
+              _this.postUpdate(updatedOffice);
+            }
+
           }
           console.log("SUCCESS response:", response)
         },
@@ -53,17 +74,11 @@ var OfficeFields = React.createClass({
           // globalMessages.addErrorMessage('Oops! Something went wrong!');
         }
       });
-    } else {
-      // update office
-      office["id"] = this.refs.id.value
-    }
 
-    console.log("office:", office);
   },
 
   render: function() {
-    var office = this.props.office
-    var officeId = office.id
+    var officeId = this.state.office.id
 
     return (
       <fieldset>
@@ -74,7 +89,8 @@ var OfficeFields = React.createClass({
                    id={'company_office_rows_' + officeId + '__id'}
                    name={'company[office_rows[' + officeId + ']][id]'}
                    ref="id"
-                   defaultValue="0" />
+                   value={this.state.office.id}
+                   onChange={this.handleChange.bind(this, 'id')} />
 
             <div className="form-group">
               <label className="control-label" htmlFor={'company_office_rows_' + officeId + '__name'}>Name</label>
@@ -83,7 +99,8 @@ var OfficeFields = React.createClass({
                      name={'company[office_rows[' + officeId + ']][name]'}
                      type="text"
                      ref="name"
-                     defaultValue={office.name} />
+                     value={this.state.office.name}
+                     onChange={this.handleChange.bind(this, 'name')} />
             </div>
 
             <div className="form-group">
@@ -93,7 +110,8 @@ var OfficeFields = React.createClass({
                      name={'company[office_rows[' + officeId + ']][city]'}
                      type="text"
                      ref="city"
-                     defaultValue={office.city} />
+                     value={this.state.office.city}
+                     onChange={this.handleChange.bind(this, 'city')} />
             </div>
 
             <div className="form-group">
@@ -103,7 +121,8 @@ var OfficeFields = React.createClass({
                      name={'company[office_rows[' + officeId + ']][state]'}
                      type="text"
                      ref="state"
-                     defaultValue={office.state} />
+                     value={this.state.office.state}
+                     onChange={this.handleChange.bind(this, 'state')} />
             </div>
 
             <div className="form-group">
@@ -113,7 +132,8 @@ var OfficeFields = React.createClass({
                      name={'company[office_rows[' + officeId + ']][employee_count]'}
                      type="text"
                      ref="employee_count"
-                     defaultValue={office.employee_count} />
+                     value={this.state.office.employee_count}
+                     onChange={this.handleChange.bind(this, 'employee_count')} />
             </div>
 
             <input className="btn btn-primary"

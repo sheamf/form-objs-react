@@ -15,7 +15,16 @@ class OfficesController < ApplicationController
   end
 
   def update
+    office = Office.find(params[:id])
+    form = EditCompanyForm::EditOfficeRow.new(office)
+    # it's not necessary to pass in the office object for this action, but the form is also used 
+    # by the EditCompanyForm, which needs the office object.  not ideal
 
+    if form.submit(params[:office])
+      render json: { updated_office: form.office }
+    else 
+      render json: { errors: form.errors }
+    end
   end
 
 end

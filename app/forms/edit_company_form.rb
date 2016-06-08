@@ -50,9 +50,7 @@ class EditCompanyForm < CompanyForm
     attr_reader :company, :office, :id
 
     def initialize(office)
-      @office = office
-      @company = office.company
-      @id = office.id # used for the hidden_field, just get from row.office in view?
+      @id = office.id
       @name = office.name
       @city = office.city
       @state = office.state
@@ -61,6 +59,20 @@ class EditCompanyForm < CompanyForm
 
     def persisted?
       true
+    end
+
+    def submit(params) # added for ajax editing of individual office
+      extract_params(params)
+      if valid?
+        persist!
+        true
+      else
+        false
+      end
+    end
+
+    def valid? # added for ajax editing of individual office
+      super
     end
 
     def extract_params(params)
@@ -72,6 +84,7 @@ class EditCompanyForm < CompanyForm
     end
 
     def persist!
+      @office = Office.find(id) # so as not to send an @office ivar to form, creating two 'office' keys in params
       if flagged_for_deletion?
         @office.destroy
       else
