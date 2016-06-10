@@ -22,26 +22,30 @@ class EditCompanyForm < CompanyForm
   end
 
   def persist!
-    @office_rows.each { |office_row| office_row.persist! }
+    @office_rows.each { |office_row| office_row.persist! } if @office_params.present?
     @company.update_attributes!(name: name, employee_count: employee_count)
   end
 
   def extract_params(params)
     super
 
-    new_office_params = @office_params.select { |k, v| v[:id].blank? }
+    if @office_params.present?
 
-    @office_rows = office_rows.select { |row| row.persisted? } # remove NewOfficeRow instances
+      new_office_params = @office_params.select { |k, v| v[:id].blank? }
 
-    @office_rows.each do |office_row|
-      params = @office_params.select { |k, v| v[:id] == office_row.office.id.to_s }
-      params = params.values.inject(:reduce)
-      office_row.extract_params(params)
-    end
+      @office_rows = office_rows.select { |row| row.persisted? } # remove NewOfficeRow instances
 
-    new_office_params.each do |k, v|
-      params = v.merge(company: company)
-      @office_rows << NewOfficeRow.new(params)
+      @office_rows.each do |office_row|
+        params = @office_params.select { |k, v| v[:id] == office_row.office.id.to_s }
+        params = params.values.inject(:reduce)
+        office_row.extract_params(params)
+      end
+
+      new_office_params.each do |k, v|
+        params = v.merge(company: company)
+        @office_rows << NewOfficeRow.new(params)
+      end
+
     end
   end
 

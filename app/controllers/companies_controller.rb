@@ -39,10 +39,10 @@ class CompaniesController < ApplicationController
     form = EditCompanyForm.new(company)
 
     if form.submit(params[:company])
-      redirect_to companies_path, notice: "Company successfully updated."
+      render json: { company: form.company }
     else
       @form = form
-      render :edit
+      render json: { errors: form.errors }
     end   
 
   end

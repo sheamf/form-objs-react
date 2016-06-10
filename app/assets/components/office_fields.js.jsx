@@ -58,6 +58,9 @@ var OfficeFields = React.createClass({
             // view.updateShift(shift);
             // SEARCH DASHBOARD FOR 'module.updateShift' for a probs good way of updating react views
             if ('new_office' in response) {
+              // at first seems kinda goofy to update state with the server response in postSave, since it should be
+              // identical to the current state, but I like it cause it should represent what's actually on the server
+              // and if something goofy happens it give the user a chance to see the incorrect whatever
               var newOffice = response.new_office // condense into 1 line
               _this.postSave(newOffice);
             } else {
