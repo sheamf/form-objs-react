@@ -16,7 +16,14 @@ class CompanyForm
   end
 
   def valid?
-    validate_rows = @office_rows.all?(&:valid?)
+    validate_rows = if @office_rows.present?
+      # need to refactor so I'm not checking for @office_rows presence
+      # all over the place
+      @office_rows.all?(&:valid?)
+    else
+      true
+    end
+
     validate_form = super()
     validate_rows && validate_form
   end

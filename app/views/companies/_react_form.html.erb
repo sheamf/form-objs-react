@@ -4,7 +4,7 @@
 
   $(function() {
     var companyForm = React.createElement(CompanyForm, { id: 'company-form', 
-                                                         title: 'Edit <%= @company.name %> + offices', 
+                                                         isNewCompanyForm: '<%= @company.present? ? false : true %>',
                                                          companyFormPath: '<%= company_form_path(@company) %>'//,
                                                        } );
     ReactDOM.render(companyForm, document.getElementById('company-form'));

@@ -26,9 +26,15 @@ var CompanyFields = React.createClass({
   saveCompany: function(e) {
     e.preventDefault();
 
+    if (this.props.context == 'new') {
+      var reqType = 'POST';
+      var url = '/companies'
+    } else if (this.props.context == 'edit') {
+      var reqType = 'PUT';
+      var url = '/companies/' + company.id;
+    }
+
     var company = this.state.company;
-    var reqType = 'PUT';
-    var url = '/companies/' + company.id;
     var params = { company }
     var _this = this;
 

@@ -9,7 +9,6 @@ class CompaniesController < ApplicationController
   end
 
   def new
-    @form = NewCompanyForm.new
   end
 
   def create
@@ -28,8 +27,12 @@ class CompaniesController < ApplicationController
   end
 
   def company_form
-    company = Company.find(params[:id])
-    form = EditCompanyForm.new(company)
+    if params[:id].nil?
+      form = NewCompanyForm.new
+    else
+      company = Company.find(params[:id])
+      form = EditCompanyForm.new(company)
+    end
 
     render json: form
   end
