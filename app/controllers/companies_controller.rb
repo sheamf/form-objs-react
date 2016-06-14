@@ -15,10 +15,9 @@ class CompaniesController < ApplicationController
     form = NewCompanyForm.new
 
     if form.submit(params[:company])
-      redirect_to companies_path, notice: "Company successfully created."
+      render json: { company: form.company }
     else
-      @form = form
-      render :new
+      render json: { errors: form.errors }
     end
   end
 
@@ -44,7 +43,6 @@ class CompaniesController < ApplicationController
     if form.submit(params[:company])
       render json: { company: form.company }
     else
-      @form = form
       render json: { errors: form.errors }
     end   
 

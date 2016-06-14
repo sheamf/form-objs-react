@@ -1,5 +1,7 @@
 class NewCompanyForm < CompanyForm
 
+  attr_reader :company
+
   def persisted?
     false
   end
@@ -17,7 +19,7 @@ class NewCompanyForm < CompanyForm
         @company.offices << office
       end
     end
-    
+
     @company.save!
   end
 

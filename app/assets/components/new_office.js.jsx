@@ -33,7 +33,7 @@ var NewOffice = React.createClass({
                   id="add-office-row" 
                   name="button"
                   type="button"
-                  onClick={this.addOfficeRow}>Add Another Office</button>
+                  onClick={this.addOfficeRow}>Add Office</button>
         </div>
       )
 

@@ -1,8 +1,8 @@
 var CompanyFields = React.createClass({
 
-  getDefaultProps: function() {
-    return { company: { name: '', employee_count: '' } }
-  },
+  // getDefaultProps: function() {
+  //   return { company: { name: '', employee_count: '' } }
+  // },
 
   getInitialState: function() {
     return { updateDisabled: true, company: this.props.company }
@@ -12,9 +12,9 @@ var CompanyFields = React.createClass({
     this.setState({ updateDisabled: false })
   },
 
-  postUpdate: function(updatedCompany) {
-    this.props.updateCompany(updatedCompany);
-    this.setState({ company: updatedCompany });
+  postSave: function(company) {
+    this.props.saveCompany(company);
+    this.setState({ company: company, updateDisabled: true });
   },
 
   handleChange: function(name, e) {
@@ -26,6 +26,10 @@ var CompanyFields = React.createClass({
   saveCompany: function(e) {
     e.preventDefault();
 
+    var company = this.state.company;
+    var params = { company }
+    var _this = this;
+
     if (this.props.context == 'new') {
       var reqType = 'POST';
       var url = '/companies'
@@ -33,10 +37,6 @@ var CompanyFields = React.createClass({
       var reqType = 'PUT';
       var url = '/companies/' + company.id;
     }
-
-    var company = this.state.company;
-    var params = { company }
-    var _this = this;
 
     $.ajax({
       type: reqType,
@@ -48,7 +48,7 @@ var CompanyFields = React.createClass({
           console.log("SUCCESS response.errors:", response.errors);
         } else {
           console.log("SUCCESS response:", response);
-          _this.postUpdate(response.company);
+          _this.postSave(response.company);
         }
       },
 
@@ -92,7 +92,7 @@ var CompanyFields = React.createClass({
           <input className="btn btn-primary"
                  name="commit"
                  type="submit"
-                 value="Update" 
+                 value="Save" 
                  disabled={this.state.updateDisabled} />
         </div>
 
