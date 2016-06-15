@@ -31,6 +31,7 @@ var OfficeFields = React.createClass({
     // console.log("in postUpdate");
     // console.log("updatedOffice", updatedOffice);
     this.props.updateOffice(updatedOffice);
+    this.setState({ updateDisabled: true });
   },
 
   handleChange: function(name, e) {
@@ -67,11 +68,7 @@ var OfficeFields = React.createClass({
             // view.updateShift(shift);
             // SEARCH DASHBOARD FOR 'module.updateShift' for a probs good way of updating react views
             if ('new_office' in response) {
-              // at first seems kinda goofy to update state with the server response in postSave, since it should be
-              // identical to the current state, but I like it cause it should represent what's actually on the server
-              // and if something goofy happens it give the user a chance to see the incorrect whatever
-              var newOffice = response.new_office // condense into 1 line
-              _this.postSave(newOffice);
+              _this.postSave(response.new_office);
             } else {
               var updatedOffice = response.updated_office
               _this.postUpdate(updatedOffice);
@@ -93,13 +90,6 @@ var OfficeFields = React.createClass({
       <fieldset>
         <div>
           <form className="form-inline" onChange={this.enableSubmit} onSubmit={this.saveOffice}>
-            <input className="id-field"
-                   type="hidden"
-                   id={'company_office_rows_' + officeId + '__id'}
-                   name={'company[office_rows[' + officeId + ']][id]'}
-                   ref="id"
-                   value={this.state.office.id}
-                   onChange={this.handleChange.bind(this, 'id')} />
 
             <div className="form-group">
               <label className="control-label" htmlFor={'company_office_rows_' + officeId + '__name'}>Name</label>

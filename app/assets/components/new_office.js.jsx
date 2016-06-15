@@ -24,6 +24,7 @@ var NewOffice = React.createClass({
   render: function() {
     var company = this.props.company
     var office = { id: 0, name: '', city: '', state: '', employee_count: null }
+    // using id of 0 since each OfficeFields needs a key (b/c there are often multiple OfficeFields sets)
 
     if (this.state.showOfficeForm == true) {
       return (

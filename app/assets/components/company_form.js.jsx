@@ -28,9 +28,6 @@ var CompanyForm = React.createClass({
           company: company, offices: offices, context: context
         })
       } else {
-        // wouldn't it be better to not have an id in this case, and just do if id is undefined when choosing
-        // whether to send a post or put request in company fields?
-        // if that works better, should probs change office fields to work that way too.  
         context = 'new'
         this.setState({ context: context })
       }

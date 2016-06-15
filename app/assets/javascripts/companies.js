@@ -1,4 +1,5 @@
 var addOfficeRow = function() {
+  console.log("WARNING: IN OLD JS!");
   var $lastOfficeRow = $('.office-row-fieldset:visible').last();
   var $newOfficeRow = $lastOfficeRow.clone();
   $newOfficeRow.find('input').val('');
@@ -32,11 +33,13 @@ var addOfficeRow = function() {
 }
 
 var removePersistedRecordFields = function($newOfficeRow) {
+  console.log("WARNING: IN OLD JS!");
   $newOfficeRow.find('.id-field').remove();
   $newOfficeRow.find('.removal-field').remove();
 }
 
 var bindRemovalLinks = function() {
+  console.log("WARNING: IN OLD JS!");
   $('.remove-office-row').unbind('click').on('click', function() {
     var $fieldset = $(this).closest('div.office-row-fieldset');
     var $removalLink = $(this);
@@ -46,6 +49,7 @@ var bindRemovalLinks = function() {
 }
 
 var manageRemovalLinks = function($fieldset, $removalLink) {
+  console.log("WARNING: IN OLD JS!");
   event.preventDefault();
   var $confirmLinksDiv = $fieldset.find('.remove-confirm');
   var $confirmLinks = $confirmLinksDiv.find('.remove-office-row');
@@ -67,6 +71,7 @@ var manageRemovalLinks = function($fieldset, $removalLink) {
 }
 
 var removeOfficeRow = function($confirmLink) {
+  console.log("WARNING: IN OLD JS!");
   var $fieldset = $confirmLink.closest('div.office-row-fieldset');
   var $removalField = $fieldset.find('.removal-field');
 
@@ -80,6 +85,7 @@ var removeOfficeRow = function($confirmLink) {
 }
 
 var manageFirstRowRemovalLink = function() {
+  console.log("WARNING: IN OLD JS!");
   var $firstRow = $('.office-row-fieldset').first();
   var visibleOfficeRowCount = $('.office-row-fieldset:visible').length;
 
@@ -91,12 +97,13 @@ var manageFirstRowRemovalLink = function() {
 }
 
 var ready = function() {
-  $('#add-office-row').on('click', function() {
-    addOfficeRow();
-  });
+  // console.log("WARNING: IN OLD JS!");
+  // $('#add-office-row').on('click', function() {
+  //   addOfficeRow();
+  // });
 
-  manageFirstRowRemovalLink();
-  bindRemovalLinks();
+  // manageFirstRowRemovalLink();
+  // bindRemovalLinks();
 }
 
 $(document).ready(ready);
