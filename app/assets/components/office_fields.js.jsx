@@ -7,21 +7,30 @@ var OfficeFields = React.createClass({
     return { updateDisabled: true, office: this.props.office }
   },
 
+  // componentWillReceiveProps: function(nextProps) {
+  //   console.log("in OfficeFields, componentWillReceiveProps");
+  // },
+
+  // componentWillUpdate: function(nextProps, nextState) {
+  //   console.log("in OfficeFields, componentWillUpdate...nextProps:", nextProps);
+  //   console.log("...nextState:", nextState);
+  // },
+
   enableSubmit: function(e) {
     this.setState({ updateDisabled: false })
   },
 
   postSave: function(newOffice) {
-    console.log("in postSave");
+    // console.log("in postSave");
+    // console.log("newOffice", newOffice);
     this.props.addOffice(newOffice);
-    this.setState({ updateDisabled: true, office: this.props.office })
     this.props.hideForm();
   },
 
   postUpdate: function(updatedOffice) {
-    console.log("in postUpdate");
+    // console.log("in postUpdate");
+    // console.log("updatedOffice", updatedOffice);
     this.props.updateOffice(updatedOffice);
-    this.setState({ updateDisabled: true, office: this.props.office })
   },
 
   handleChange: function(name, e) {
@@ -65,15 +74,12 @@ var OfficeFields = React.createClass({
               _this.postSave(newOffice);
             } else {
               var updatedOffice = response.updated_office
-              console.log("updatedOffice", updatedOffice);
               _this.postUpdate(updatedOffice);
             }
 
           }
-          console.log("SUCCESS response:", response)
         },
         error: function(response) {
-          console.log("ERROR response:", response)
           // globalMessages.addErrorMessage('Oops! Something went wrong!');
         }
       });

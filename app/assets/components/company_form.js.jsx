@@ -4,6 +4,15 @@ var CompanyForm = React.createClass({
     return { company: { name: null, employee_count: null }, offices: [], context: null }
   },
 
+  // componentWillReceiveProps: function(nextProps) {
+  //   console.log("in CompanyForm, componentWillReceiveProps");
+  // },
+
+  // componentWillUpdate: function(nextProps, nextState) {
+  //   console.log("in CompanyForm, componentWillUpdate...nextProps:", nextProps);
+  //   console.log("...nextState:", nextState);
+  // },
+
   componentDidMount: function() {
     $.get(this.props.companyFormPath, function(response) {
       console.log("response:", response);
@@ -34,7 +43,6 @@ var CompanyForm = React.createClass({
   },
 
   addOffice: function(office) {
-
     this.state.offices.push(office)  
     this.setState({ offices: this.state.offices })
   },
@@ -50,7 +58,7 @@ var CompanyForm = React.createClass({
 
   render: function() {
     console.log("in render fn");
-    if (this.state.context == null) {
+    if (this.state.context == null) { // reverse to be if this.state.context, then return shit, else return null
 
       return null
 

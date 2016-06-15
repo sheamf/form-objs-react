@@ -1,5 +1,14 @@
 var OfficeRows = React.createClass({
 
+  // componentWillReceiveProps: function(nextProps) {
+  //   console.log("in OfficeRows, componentWillReceiveProps");
+  // },
+
+  // componentWillUpdate: function(nextProps, nextState) {
+  //   console.log("in OfficeRows, componentWillUpdate...nextProps:", nextProps);
+  //   console.log("...nextState:", nextState);
+  // },
+
   render: function() {
     var thisProps = this.props;
     var numOffices = this.props.offices.length;

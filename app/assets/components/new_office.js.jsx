@@ -4,6 +4,15 @@ var NewOffice = React.createClass({
     return { showOfficeForm: false }
   },
 
+  // componentWillReceiveProps: function(nextProps) {
+  //   console.log("in NewOffice, componentWillReceiveProps");
+  // },
+
+  // componentWillUpdate: function(nextProps, nextState) {
+  //   console.log("in NewOffice, componentWillUpdate...nextProps:", nextProps);
+  //   console.log("...nextState:", nextState);
+  // },
+
   addOfficeRow: function() {
     this.setState({ showOfficeForm: true })
   },

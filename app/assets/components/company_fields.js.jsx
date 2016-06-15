@@ -1,20 +1,26 @@
 var CompanyFields = React.createClass({
 
-  // getDefaultProps: function() {
-  //   return { company: { name: '', employee_count: '' } }
-  // },
-
   getInitialState: function() {
     return { updateDisabled: true, company: this.props.company }
   },
+
+  // componentWillReceiveProps: function(nextProps) {
+    // console.log("in CompanyFields, componentWillReceiveProps");
+  // },
+
+  // componentWillUpdate: function(nextProps, nextState) {
+  //   console.log("in CompanyFields, componentWillUpdate...nextProps:", nextProps);
+  //   console.log("...nextState:", nextState);
+  // },
 
   enableSubmit: function() {
     this.setState({ updateDisabled: false })
   },
 
   postSave: function(company) {
+    console.log("in CompanyFields, postSave");
     this.props.saveCompany(company);
-    this.setState({ company: company, updateDisabled: true });
+    this.setState({ updateDisabled: true });
   },
 
   handleChange: function(name, e) {
@@ -45,15 +51,12 @@ var CompanyFields = React.createClass({
       data: params,
       success: function(response) {
         if (response.errors) {
-          console.log("SUCCESS response.errors:", response.errors);
         } else {
-          console.log("SUCCESS response:", response);
           _this.postSave(response.company);
         }
       },
 
-      error: function(response) {
-        console.log("ERROR response:", response)        
+      error: function(response) {   
       }
 
     });
