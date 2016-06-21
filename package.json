@@ -1,0 +1,11 @@
+{
+  "name": "form-objs-react",
+  "dependencies" : {
+    "browserify": "~10.2.4",
+    "browserify-incremental": "^3.0.1"
+  },
+  "license": "",
+  "engines": {
+    "node": ">= 0.10"
+  }
+}

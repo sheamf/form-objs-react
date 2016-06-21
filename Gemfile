@@ -35,6 +35,7 @@ gem 'binding_of_caller'
 gem 'simple_form'
 gem 'verbs'
 gem 'react-rails', '~> 1.6.0'
+gem 'browserify-rails', '~> 0.9.1'
 
 group :test, :development do
   gem 'database_cleaner'

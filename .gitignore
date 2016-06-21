@@ -19,6 +19,8 @@
 # Ignore Bower Assets
 /vendor/assets/components
 
+node_modules
+
 # ds store file
 .DS_Store
 

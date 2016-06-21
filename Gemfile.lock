@@ -54,6 +54,8 @@ GEM
     bootstrap-sass (3.3.3)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
+    browserify-rails (0.9.3)
+      sprockets (~> 2.2)
     builder (3.2.2)
     capybara (2.4.4)
       mime-types (>= 1.16)
@@ -197,6 +199,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass
+  browserify-rails (~> 0.9.1)
   capybara
   coffee-rails (~> 4.0.0)
   database_cleaner
